@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #08080a;
+  color: #ededef;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #ff5500;
+  color: #08080a;
+}
+
+/* Subtle blueprint grid, faded toward the edges. */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 78% 55% at 50% 0%, #000 30%, transparent 82%);
+  mask-image: radial-gradient(ellipse 78% 55% at 50% 0%, #000 30%, transparent 82%);
+}
+
+/* One soft accent glow, top-right. */
+.glow {
+  background: radial-gradient(48% 42% at 80% 10%, rgba(255, 85, 0, 0.15), transparent 60%);
+}
+
+/* Restrained entrance — used once in the hero, not everywhere. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.rise-slow {
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+}
+
+/* FAQ accordion marker rotation. */
+details[open] summary .faq-plus {
+  transform: rotate(45deg);
+}
