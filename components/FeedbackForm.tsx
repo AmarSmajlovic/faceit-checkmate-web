@@ -19,7 +19,9 @@ export function FeedbackForm() {
 
     const data = new FormData(form);
     data.set("type", type);
-    data.set("_subject", `CheckMate ${type} report`);
+    data.set("access_key", site.web3formsKey);
+    data.set("subject", `CheckMate ${type} report`);
+    data.set("from_name", "FACEIT CheckMate");
 
     try {
       const res = await fetch(site.feedbackEndpoint, {
@@ -68,8 +70,8 @@ export function FeedbackForm() {
       onSubmit={handleSubmit}
       className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 sm:p-7"
     >
-      {/* honeypot for spam bots */}
-      <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="hidden" />
+      {/* honeypot for spam bots (Web3Forms checks this field) */}
+      <input type="checkbox" name="botcheck" tabIndex={-1} className="hidden" style={{ display: "none" }} />
 
       <div className="flex gap-2" role="tablist" aria-label="Feedback type">
         {TYPES.map((t) => (
