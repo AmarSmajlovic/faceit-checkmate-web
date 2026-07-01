@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { track } from "@vercel/analytics";
 import { site } from "@/lib/site";
 
 /** Small mono caption above a heading. Used sparingly. */
@@ -86,6 +89,7 @@ export function CtaButton({
       href={site.chromeUrl}
       target="_blank"
       rel="noopener"
+      onClick={() => track("add_to_chrome", { variant })}
       className={`inline-flex items-center justify-center gap-2.5 rounded-xl tracking-tight transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-faceit-orange/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink ${variants[variant]} ${sizes[size]} ${className}`}
     >
       {children}

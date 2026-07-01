@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { track } from "@vercel/analytics";
 import { site } from "@/lib/site";
 
 const TYPES = ["Bug", "Idea", "Other"] as const;
@@ -28,6 +29,7 @@ export function FeedbackForm() {
       });
       if (res.ok) {
         setStatus("ok");
+        track("feedback_submitted", { type });
         form.reset();
         setType("Bug");
       } else {
