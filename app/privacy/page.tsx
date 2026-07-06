@@ -12,11 +12,11 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <main className="min-h-screen bg-ink">
-      <header className="border-b border-white/[0.06]">
+      <header className="border-b border-line">
         <div className="mx-auto flex max-w-3xl items-center px-5 py-4 sm:px-6">
           <Link href="/" className="flex items-center gap-2.5">
             <BrandLogo size={26} />
-            <span className="font-display text-sm font-bold tracking-tight">
+            <span className="font-display text-base font-bold uppercase italic tracking-tight">
               Check<span className="text-faceit-orange">Mate</span>
             </span>
           </Link>
@@ -25,7 +25,7 @@ export default function PrivacyPage() {
 
       <article className="mx-auto max-w-3xl px-5 py-16 sm:px-6">
         <Eyebrow>Last updated · 1 July 2026</Eyebrow>
-        <h1 className="mt-4 font-display text-4xl font-bold tracking-[-0.02em]">
+        <h1 className="mt-4 font-display text-5xl font-bold uppercase tracking-tight">
           Privacy Policy
         </h1>
 
@@ -83,7 +83,7 @@ export default function PrivacyPage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="font-display text-lg font-semibold tracking-tight text-white">{title}</h2>
+      <h2 className="font-display text-xl font-bold uppercase tracking-wide text-white">{title}</h2>
       <p className="mt-2.5 leading-relaxed">{children}</p>
     </section>
   );

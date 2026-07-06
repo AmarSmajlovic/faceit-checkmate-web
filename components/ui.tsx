@@ -5,10 +5,11 @@ import Link from "next/link";
 import { track } from "@vercel/analytics";
 import { site } from "@/lib/site";
 
-/** Small mono caption above a heading. Used sparingly. */
+/** Mono section label with a slash prefix — reads like a HUD callout. */
 export function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <span className="font-mono text-[11px] font-medium uppercase tracking-[0.24em] text-faceit-orange">
+    <span className="inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-white/45">
+      <span className="text-faceit-orange">//</span>
       {children}
     </span>
   );
@@ -18,7 +19,7 @@ export function Eyebrow({ children }: { children: React.ReactNode }) {
 export function BrandLogo({ size = 28, className = "" }: { size?: number; className?: string }) {
   return (
     <span
-      className={`inline-grid shrink-0 place-items-center overflow-hidden rounded-lg ring-1 ring-white/10 ${className}`}
+      className={`inline-grid shrink-0 place-items-center overflow-hidden ring-1 ring-white/10 ${className}`}
       style={{ width: size, height: size }}
     >
       <Image
@@ -40,29 +41,24 @@ export function ChromeIcon({ className = "" }: { className?: string }) {
   );
 }
 
-/** Clean, monochrome social-proof pill — no rainbow avatars. */
+/** Angular social-proof chip — player count as a scoreboard stat. */
 export function ProofPill({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] py-1.5 pl-2 pr-4 ${className}`}
+      className={`clip-chip inline-flex items-center gap-3 border border-line bg-ink-800 py-2 pl-4 pr-5 ${className}`}
     >
-      <span className="grid h-6 w-6 place-items-center rounded-full bg-faceit-orange/15 text-faceit-orange">
-        <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor">
-          <path
-            d="M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M9 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm13 9v-1a4 4 0 0 0-3-3.87M16 4.13A4 4 0 0 1 16 12"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+      <span className="font-display text-lg font-bold italic leading-none text-faceit-orange">
+        {site.stats.users}
       </span>
-      <span className="text-sm text-white/65">
-        <span className="font-semibold text-white">{site.stats.users}</span> FACEIT players on board
-      </span>
+      <span className="text-[13px] text-white/60">FACEIT players on board</span>
     </div>
   );
 }
 
+/**
+ * The signature CTA: a hard-edged parallelogram, uppercase condensed label.
+ * Content is counter-skewed so text stays upright.
+ */
 export function CtaButton({
   children,
   variant = "solid",
@@ -76,13 +72,12 @@ export function CtaButton({
 }) {
   const variants = {
     solid:
-      "bg-faceit-orange text-black font-semibold shadow-[0_12px_36px_-12px_rgba(255,85,0,0.65)] hover:brightness-[1.08]",
-    ghost:
-      "text-white/85 font-medium ring-1 ring-inset ring-white/15 hover:ring-white/35 hover:bg-white/[0.03]",
+      "bg-faceit-orange text-black hover:bg-faceit-glow shadow-[0_10px_30px_-10px_rgba(255,85,0,0.55)]",
+    ghost: "bg-ink-700 text-white/85 hover:bg-ink-600",
   };
   const sizes = {
-    md: "px-5 py-3 text-sm",
-    lg: "px-7 py-4 text-[15px]",
+    md: "px-6 py-3 text-[13px]",
+    lg: "px-9 py-4 text-[15px]",
   };
   return (
     <Link
@@ -90,7 +85,7 @@ export function CtaButton({
       target="_blank"
       rel="noopener"
       onClick={() => track("add_to_chrome", { variant })}
-      className={`inline-flex items-center justify-center gap-2.5 rounded-xl tracking-tight transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-faceit-orange/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`clip-cta inline-flex items-center justify-center gap-2.5 font-display font-bold uppercase tracking-[0.08em] transition duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-faceit-orange/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink ${variants[variant]} ${sizes[size]} ${className}`}
     >
       {children}
     </Link>

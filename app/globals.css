@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  background-color: #08080a;
+  background-color: #0b0b0d;
   color: #ededef;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -20,25 +20,71 @@ body {
 
 ::selection {
   background: #ff5500;
-  color: #08080a;
+  color: #0b0b0d;
 }
 
-/* Subtle blueprint grid, faded toward the edges. */
-.bg-grid {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
-  background-size: 64px 64px;
-  -webkit-mask-image: radial-gradient(ellipse 78% 55% at 50% 0%, #000 30%, transparent 82%);
-  mask-image: radial-gradient(ellipse 78% 55% at 50% 0%, #000 30%, transparent 82%);
+/* ---------------------------------------------------------------------------
+   Angular, esports-grade shapes. FACEIT's language is hard edges and skew —
+   no rounded glass cards.
+--------------------------------------------------------------------------- */
+
+/* Parallelogram button — the signature FACEIT CTA shape. */
+.clip-cta {
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
 }
 
-/* One soft accent glow, top-right. */
-.glow {
-  background: radial-gradient(48% 42% at 80% 10%, rgba(255, 85, 0, 0.15), transparent 60%);
+/* Panel with a sliced bottom-right corner. */
+.clip-panel {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 16px),
+    calc(100% - 16px) 100%,
+    0 100%
+  );
 }
 
-/* Restrained entrance — used once in the hero, not everywhere. */
+/* Small chip with sliced corners on opposite ends. */
+.clip-chip {
+  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+}
+
+/* Hazard stripes — used as thin accent seams, never as a full background. */
+.stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 85, 0, 0.85) 0 6px,
+    transparent 6px 14px
+  );
+}
+
+.stripes-dim {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.08) 0 6px,
+    transparent 6px 14px
+  );
+}
+
+/* Fine dot matrix for section backdrops — quieter than a grid. */
+.bg-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 25%, transparent 80%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 25%, transparent 80%);
+}
+
+/* One hard-edged accent wash behind the hero, biased right. */
+.hero-wash {
+  background:
+    radial-gradient(42% 38% at 78% 18%, rgba(255, 85, 0, 0.16), transparent 62%),
+    radial-gradient(30% 26% at 12% 88%, rgba(255, 85, 0, 0.06), transparent 65%);
+}
+
+/* ---------------------------------------------------------------------------
+   Motion — one entrance in the hero, a slow ticker, a scanning pulse.
+--------------------------------------------------------------------------- */
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -50,10 +96,48 @@ body {
   }
 }
 .rise {
-  animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .rise-slow {
-  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+  animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+/* Marquee ticker strip. Track holds two copies of the row; shift by -50%. */
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 28s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+  .rise,
+  .rise-slow {
+    animation-duration: 0.01s;
+  }
+}
+
+/* Blinking status dot. */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+.blink {
+  animation: blink 1.6s ease-in-out infinite;
 }
 
 /* FAQ accordion marker rotation. */

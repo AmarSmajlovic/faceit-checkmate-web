@@ -44,20 +44,22 @@ export function FeedbackForm() {
 
   if (status === "ok") {
     return (
-      <div className="flex h-full min-h-[19rem] flex-col items-center justify-center rounded-2xl border border-white/[0.08] bg-white/[0.02] p-8 text-center">
-        <span className="grid h-12 w-12 place-items-center rounded-full bg-faceit-orange/15 text-faceit-orange">
+      <div className="clip-panel flex h-full min-h-[19rem] flex-col items-center justify-center border border-line bg-ink-800 p-8 text-center">
+        <span className="grid h-12 w-12 place-items-center bg-faceit-orange/15 text-faceit-orange">
           <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor">
             <path d="m5 13 4 4L19 7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </span>
-        <h3 className="mt-5 font-display text-xl font-semibold text-white">Got it — thank you.</h3>
+        <h3 className="mt-5 font-display text-2xl font-bold uppercase tracking-wide text-white">
+          Got it — thank you.
+        </h3>
         <p className="mt-2 max-w-xs text-sm text-white/55">
           Every report makes CheckMate better. If you left an email, I&apos;ll get back to you.
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="mt-6 text-sm font-medium text-faceit-orange hover:underline"
+          className="mt-6 font-display text-sm font-bold uppercase tracking-[0.1em] text-faceit-orange hover:underline"
         >
           Send another
         </button>
@@ -68,7 +70,7 @@ export function FeedbackForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 sm:p-7"
+      className="clip-panel border border-line bg-ink-800 p-6 sm:p-7"
     >
       {/* honeypot for spam bots (Web3Forms checks this field) */}
       <input type="checkbox" name="botcheck" tabIndex={-1} className="hidden" style={{ display: "none" }} />
@@ -80,10 +82,10 @@ export function FeedbackForm() {
             type="button"
             onClick={() => setType(t)}
             aria-pressed={type === t}
-            className={`flex-1 rounded-lg px-3 py-2 text-sm font-medium transition ${
+            className={`clip-chip flex-1 px-3 py-2 font-display text-sm font-bold uppercase tracking-[0.08em] transition ${
               type === t
                 ? "bg-faceit-orange text-black"
-                : "bg-white/[0.03] text-white/60 ring-1 ring-inset ring-white/10 hover:text-white"
+                : "bg-ink-700 text-white/55 hover:text-white"
             }`}
           >
             {t}
@@ -102,7 +104,7 @@ export function FeedbackForm() {
               ? "It said 'Auth Error' after clicking Match Details on..."
               : "It would be great if CheckMate could also..."
           }
-          className="mt-2 w-full resize-none rounded-lg border border-white/10 bg-ink-900 px-3.5 py-3 text-sm text-white placeholder:text-white/25 focus:border-faceit-orange/50 focus:outline-none focus:ring-1 focus:ring-faceit-orange/40"
+          className="mt-2 w-full resize-none border border-line bg-ink-900 px-3.5 py-3 text-sm text-white placeholder:text-white/25 focus:border-faceit-orange/60 focus:outline-none focus:ring-1 focus:ring-faceit-orange/40"
         />
       </label>
 
@@ -112,20 +114,20 @@ export function FeedbackForm() {
           type="email"
           name="email"
           placeholder="you@email.com"
-          className="mt-2 w-full rounded-lg border border-white/10 bg-ink-900 px-3.5 py-3 text-sm text-white placeholder:text-white/25 focus:border-faceit-orange/50 focus:outline-none focus:ring-1 focus:ring-faceit-orange/40"
+          className="mt-2 w-full border border-line bg-ink-900 px-3.5 py-3 text-sm text-white placeholder:text-white/25 focus:border-faceit-orange/60 focus:outline-none focus:ring-1 focus:ring-faceit-orange/40"
         />
       </label>
 
       <button
         type="submit"
         disabled={status === "sending"}
-        className="mt-6 w-full rounded-xl bg-faceit-orange py-3.5 text-sm font-semibold text-black shadow-[0_12px_36px_-12px_rgba(255,85,0,0.65)] transition hover:brightness-[1.08] disabled:opacity-60"
+        className="clip-cta mt-6 w-full bg-faceit-orange py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] text-black shadow-[0_10px_30px_-10px_rgba(255,85,0,0.55)] transition hover:bg-faceit-glow disabled:opacity-60"
       >
         {status === "sending" ? "Sending…" : "Send feedback"}
       </button>
 
       {status === "error" && (
-        <p className="mt-3 text-center text-sm text-red-400">
+        <p className="mt-3 text-center text-sm text-loss">
           Couldn&apos;t send — try again, or ping me on Discord.
         </p>
       )}
